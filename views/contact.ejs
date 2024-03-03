@@ -1,0 +1,102 @@
+
+<section class="container home-contact  pt-5">
+  <div class="row ">
+    <div class="col-11 col-lg-10 mx-auto">
+      <h1 class="my-3">List Contact</h1>
+
+<% if (notification.length !== 0) { %>
+<div id="notification" class="alert alert-success" role="alert">
+  <%= notification %>
+</div>
+
+<% } %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Nama</th>
+      <th scope="col">No HP</th>
+      <th scope="col">Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% contacts.map((item,index) => { %>
+    <tr>
+      <th scope="row"><%- index+1 %></th>
+      <td><%- item?.name %></td>
+      <td><%- item?.nohp %></td>
+      <td class="d-flex">
+        <a href="/contact/<%= item.id %>">
+         
+            <span class="badge text-bg-primary bg-success">Detail</span>
+          
+        </a>
+        <!-- Mengoverride http method -->
+       
+          <button
+          id="button-delete"
+          type="button"
+          class="button"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDelete"
+          data-id="<%= item.id %>"
+
+        >
+          <span class="badge text-bg-primary bg-danger">Delete</span>
+        </button>
+
+        
+
+        <a href="/contact/update/<%= item.id %>">
+         
+            <span class="badge text-bg-primary bg-warning">Update</span>
+      
+        </a>
+        <!-- moda box confirm delete -->
+        <%- include("./components/modal-box.ejs") %>
+      </td>
+    </tr>
+
+    <% }) %>
+  </tbody>
+</table>
+<div class="d-flex justify-content-end my-4">
+  <a href="/contact/add" class="btn btn-primary">Tambah Data</a>
+</div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const notification = document.querySelector("#notification");
+  setTimeout(() => {
+    if (notification) {
+      notification.style.display = "none";
+    }
+  }, 3000);
+
+  // menambil id sesuai dengan tombo delete yang sedang diklik
+  const confirmDelete =document.querySelector("#confirm-delete")
+  const buttonsDelete = document.querySelectorAll("#button-delete");
+  buttonsDelete.forEach((button) => {
+    button.addEventListener("click", () => {
+      // set id yang telah dikirim dengan data-id="" pada tag button dengan id button-deleted
+      let id = button.dataset.id;
+      console.log("🚀 ~ button.addEventListener ~ id:", id)
+      // set id ke dataset tag a dengan id confirm-delete, datsaet.id bisa diketuhui ada atribut tag(cek dikonsol browser)
+      confirmDelete.value= id;
+    });
+  });
+
+
+
+  // // Hapus contact
+  // // beri kondisi jika hasil dari node list deleteButtons > 0 (artinya data contacts ada) maka eventnya baru dijalankan
+  // if (buttonsDelete.length > 0) {
+  //   confirmDelete.addEventListener("click", () => {
+  //     const id = confirmDelete.dataset.id;
+  //     console.log("🚀 ~ confirmDelete.addEventListener ~ id:", id);
+  //   });
+  // }
+</script>

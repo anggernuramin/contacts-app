@@ -1,0 +1,131 @@
+<div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 px-3">
+        <div class="row ">
+          <div class="col-lg-6 align-self-center">
+            <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+              <div class="row">
+                <div class="col-lg-12">
+                  <h2 class="">Managing Your Contacts</h2>
+                  <p>Our Contact App is a comprehensive solution for storing and organizing your contacts with ease and
+                    efficiency. With an intuitive interface and advanced features, you can quickly add, edit, and delete
+                    contacts.</p>
+                </div>
+                <div class="col-lg-12">
+                  <div class="white-button first-button scroll-to-section">
+                    <a href="https://github.com/anggernuramin/contact-apps-cli">Download CLI <i class="bi bi-github"></i></a>
+                  </div>
+                  <div class="white-button scroll-to-section">
+                    <a href="https://github.com/anggernuramin/contacts-app-gui" target="_blank">Download GUI <i class="bi bi-github"></i></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+              <img src="assets/images/slider-dec.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="container home-contact ">
+  <div class="row ">
+    <div class="col-11 col-lg-10 mx-auto">
+      <h2 class="fs-1 mb-3 fw-semibold">Contoh tampilan contact app</h2>
+      <p class="mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque id quam beatae excepturi pariatur
+        blanditiis voluptatem eveniet perferendis voluptate a?</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            <th scope="col">No HP</th>
+
+            <th scope="col">Aksi</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <% contacts.map((item,index)=> { %>
+            <tr>
+              <th scope="row"><%- index+1 %></th>
+              <td><%- item?.name %></td>
+              <td><%- item?.nohp %></td>
+              <td class="d-flex  gap-2 ">
+
+                <span class="badge text-bg-success bg-success d-flex gap-2">
+                  <i class="bi bi-info-circle"></i>
+                  Detail</span>
+                <span class="badge text-bg-danger bg-danger d-flex gap-2">
+                  <i class="bi bi-trash3-fill"></i>
+                  Delete</span><span class="badge text-bg-warning bg-warning d-flex gap-2">
+                  <i class="bi bi-pencil-fill"></i>
+                  Update</span>
+
+              </td>
+            </tr>
+
+            <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<div id="services" class="services section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+          <h4>Amazing <em>Services &amp; Features</em> for you</h4>
+          <img src="assets/images/heading-line-dec.png" alt="">
+          <p>If you need the greatest collection of HTML templates for your business, please visit <a rel="nofollow" href="https://www.toocss.com/" target="_blank">TooCSS</a> Blog. If you need to have a contact form PHP script, go to <a href="https://templatemo.com/contact" target="_parent">our contact page</a> for more information.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="service-item first-service">
+          <div class="icon"></div>
+          <h4>App Maintenance</h4>
+          <p>You are not allowed to redistribute this template ZIP file on any other website.</p>
+          
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="service-item second-service">
+          <div class="icon"></div>
+          <h4>Rocket Speed of App</h4>
+          <p>You are allowed to use the Chain App Dev HTML template. Feel free to modify or edit this layout.</p>
+          
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="service-item third-service">
+          <div class="icon"></div>
+          <h4>Multi Workflow Idea</h4>
+          <p>If this template is beneficial for your work, please support us <a rel="nofollow" href="https://paypal.me/templatemo" target="_blank">a little via PayPal</a>. Thank you.</p>
+          
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="service-item fourth-service">
+          <div class="icon"></div>
+          <h4>24/7 Help &amp; Support</h4>
+          <p>Lorem ipsum dolor consectetur adipiscing elit sedder williamsburg photo booth quinoa and fashion axe.</p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

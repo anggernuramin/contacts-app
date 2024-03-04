@@ -8,7 +8,7 @@
 >
   <div class="container">
     <div class="row ">
-      <div class="col-11 mx-auto">
+      <div class="col-11 mx-auto ">
         <nav class="main-nav">
           <!-- ***** Logo Start ***** -->
           <a href="index.html" class="logo">
@@ -18,15 +18,21 @@
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
             <li class="scroll-to-section">
-              <a href="/" class="active">Home</a>
+              <a href="/" class="<%= url == "/" ? "active" : ""%>">Home</a>
             </li>
-            <li class="scroll-to-section"><a href="/contact">Contacts</a></li>
-            <li class="scroll-to-section"><a href="/about">About</a></li>
-            <li class="scroll-to-section"><a href="/cli">CLI</a></li>
+            <li class="scroll-to-section">
+              <a href="/contact" class="<%= url == "/contact" ? "active" : ""%>">Contacts</a>
+            </li>
+            <li class="scroll-to-section">
+              <a href="/about" class="<%= url == "/about" ? "active" : ""%>">About</a>
+            </li>
+            <li class="scroll-to-section">
+              
+              <a href="/cli" class="<%= url == "cli" ? "active" : ""%>">CLI</a></li>
             <li>
               <div class="gradient-button">
-                <a id="modal_trigger" href="/contact/add"
-                  ><i class="bi bi-plus-circle"></i> Create Contacts</a
+                <a id="modal_trigger" href="/contact"
+                  >Create Contacts</a
                 >
               </div>
             </li>

@@ -97,12 +97,13 @@ app.get("/about", (req, res) => {
 app.get("/contact", async (req, res) => {
   // Contact adalah nama collection
   const contacts = await Contact.find();
-
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
   res.render("contact", {
     title: "Page Contact",
     layout: "layouts/main-layout",
     url: req.url,
     contacts,
+    messageError: "",
     notification: req.flash("notification"),
   });
 });
@@ -141,6 +142,44 @@ app.post(
     }
   }
 );
+
+// halaman hasil search contact
+app.get("/contact/search", async (req, res) => {
+  const query = req.query.q; // Mendapatkan nilai parameter pencarian dari URL yaitu q (sesaui dengan keyword setelah tanda "contact/search/?")
+  const searchContact = await Contact.find({
+    name: { $regex: query, $options: "i" },
+  }); // mengambil menggunakan regex ke data dengan ketentuan apapun nama yang mengandung kata pada query dan option i artinya kata akan case senstitif ada huruf kecil atau besar yang sama pada query maka data akan ditampilkan
+  console.log("🚀 ~ app.get ~ searchContact:", searchContact);
+  if (searchContact.length > 0) {
+    res.render("contact", {
+      title: "SeaRCH Contact",
+      url: req.url,
+      layout: "layouts/main-layout",
+      contacts: searchContact,
+      messageError: "",
+      notification: req.flash("notification"),
+    });
+  } else {
+    res.render("contact", {
+      title: "Search Contact",
+      url: req.url,
+      layout: "layouts/main-layout",
+      contacts: [],
+      messageError: "Hasil pencarian tidak ditemukan",
+      notification: req.flash("notification"),
+    });
+  }
+});
+
+// post from search contact yang akan menamgambil dari dat dari query
+app.post("/search/contact", (req, res) => {
+  // Ambil value yang dikirim di form search
+  const query = req.body.search;
+  // gunakan encodedURIComponent agar query diubah ke format url yang valid misal tanda spasi akan diganti %20 ke format url
+  const searchUrl = `/contact/search?q=${encodeURIComponent(query)}`;
+  // redirect ke halaman /seacrh/contact?q=========
+  res.redirect(searchUrl);
+});
 
 // method delete contact
 app.delete("/contact", async (req, res) => {

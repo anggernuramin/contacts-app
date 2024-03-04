@@ -129,6 +129,10 @@
     color: orange;
     font-style: italic;
 }
+.description-aboutCode{
+    display: block;
+    width: 70%;
+}
 /* .navbar-nav{
     gap: 20px;
 }

@@ -1,4 +1,6 @@
+import {} from "dotenv/config.js";
 import express from "express";
+import fs, { stat, writeFileSync } from "fs";
 import expressLayouts from "express-ejs-layouts";
 import cookieParser from "cookie-parser";
 import session from "express-session";
@@ -6,10 +8,12 @@ import flash from "connect-flash";
 import { body, check, validationResult } from "express-validator";
 import methodOverride from "method-override";
 const app = express();
-const port = "3000";
+const port = process.env.PORT || 3000;
 
 import connectDb from "./utils/db.mjs"; // connect database
 import Contact from "./model/contacts.mjs"; // schema database
+import { fileLoader } from "ejs";
+import { url } from "inspector";
 
 // start middleware
 app.use(express.static("public"));
@@ -108,6 +112,34 @@ app.get("/contact", async (req, res) => {
   });
 });
 
+// post handle download file
+app.post("/contact/download", async (req, res) => {
+  // res.download("data/contacts.json");
+  const typeFile = req.body.downloadFile;
+  const dirPath = "./data";
+  const dataPath = `./data/contacts.${typeFile}`;
+
+  // buat direktory data jika belum ada
+
+  fs.stat(dirPath, (err) => {
+    if (err) {
+      fs.mkdirSync(dirPath);
+    }
+  });
+
+  if (!fs.existsSync(dataPath)) {
+    fs.writeFileSync(dataPath, "[]");
+  }
+
+  if (typeFile === "Json") {
+    const contacts = await Contact.find();
+    await fs.promises.writeFile(dataPath, JSON.stringify(contacts));
+    res.download(dataPath);
+  }
+
+  // res.redirect("/contact");
+});
+
 // post form tambah data contact
 app.post(
   "/contact",
@@ -149,10 +181,9 @@ app.get("/contact/search", async (req, res) => {
   const searchContact = await Contact.find({
     name: { $regex: query, $options: "i" },
   }); // mengambil menggunakan regex ke data dengan ketentuan apapun nama yang mengandung kata pada query dan option i artinya kata akan case senstitif ada huruf kecil atau besar yang sama pada query maka data akan ditampilkan
-  console.log("🚀 ~ app.get ~ searchContact:", searchContact);
   if (searchContact.length > 0) {
     res.render("contact", {
-      title: "SeaRCH Contact",
+      title: "Search Contact",
       url: req.url,
       layout: "layouts/main-layout",
       contacts: searchContact,

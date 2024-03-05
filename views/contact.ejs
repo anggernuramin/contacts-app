@@ -96,15 +96,15 @@
         </div>
 
         <% if (contacts.length > 0) { %>
-        <div>
-          <label for="download-file">Unduh</label>
-          <select name="download-file" id="download-file">
-            <option value="Pdf">Pdf</option>
+        <form action="/contact/download" method="post">
+          <select name="downloadFile" id="downloadFile">
+            <option value="Json" selected>Json</option>
+            <option value="Pdf" >Pdf</option>
             <option value="Csv">Csv</option>
-            <option value="Json">Json</option>
             <option value="Txt">Txt</option>
           </select>
-        </div>
+          <button  type="submit">Unduh</button>
+        </form>
         <% } %>
       </div>
     </div>

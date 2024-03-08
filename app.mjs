@@ -18,6 +18,7 @@ import { url } from "inspector";
 // start middleware
 app.use(express.static("public"));
 app.use(expressLayouts);
+app.set("views", "views");
 app.set("view engine", "ejs");
 
 // create flash message

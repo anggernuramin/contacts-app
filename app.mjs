@@ -12,6 +12,7 @@ const port = process.env.PORT || 3000;
 
 import connectDb from "./utils/db.mjs"; // connect database
 import Contact from "./model/contacts.mjs"; // schema database
+import { generatePdf } from "./libs/downloadPdf.mjs";
 import { fileLoader } from "ejs";
 import { url } from "inspector";
 
@@ -117,9 +118,9 @@ app.get("/contact", async (req, res) => {
 app.post("/contact/download", async (req, res) => {
   // res.download("data/contacts.json");
   const typeFile = req.body.downloadFile;
+  console.log("🚀 ~ app.post ~ typeFile:", typeFile);
   const dirPath = "./data";
   const dataPath = `./data/contacts.${typeFile}`;
-
   // buat direktory data jika belum ada
 
   fs.stat(dirPath, (err) => {
@@ -137,8 +138,10 @@ app.post("/contact/download", async (req, res) => {
     await fs.promises.writeFile(dataPath, JSON.stringify(contacts));
     res.download(dataPath);
   }
-
-  // res.redirect("/contact");
+  if (typeFile === "Pdf") {
+    generatePdf();
+    res.download(dataPath);
+  }
 });
 
 // post form tambah data contact

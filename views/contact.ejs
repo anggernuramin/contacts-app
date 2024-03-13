@@ -1,4 +1,9 @@
+
 <section class="container list-contact">
+  <table id="my-table">
+    
+  </table>
+
   <div class="row">
     <div class="col-11 col-lg-11 mx-auto wrapper-contact">
       <div class="d-flex justify-content-between my-3">
@@ -26,7 +31,6 @@
       <div id="notification" class="alert alert-success" role="alert">
         <%= notification %>
       </div>
-
       <% } %> <% if (contacts.length > 0) { %>
       <table class="table">
         <thead>
@@ -89,23 +93,24 @@
       <% } %>
 
       <div class="d-flex justify-content-end align-items-center gap-2">
+        <% if (contacts.length > 0) { %>
+          <form action="/contact/download" method="post">
+            <select name="downloadFile" id="downloadFile">
+              <option value="Json" selected>Json</option>
+              <option value="Pdf" >Pdf</option>
+              <option value="Csv">Csv</option>
+              <option value="Txt">Txt</option>
+            </select>
+            <button  type="submit">Unduh</button>
+          </form>
+          <% } %>
         <div class="d-flex justify-content-end my-4 gradient-button">
           <a href="/contact/add" class="btn btn-primary border-0"
             >Add Contact</a
           >
         </div>
 
-        <% if (contacts.length > 0) { %>
-        <form action="/contact/download" method="post">
-          <select name="downloadFile" id="downloadFile">
-            <option value="Json" selected>Json</option>
-            <option value="Pdf" >Pdf</option>
-            <option value="Csv">Csv</option>
-            <option value="Txt">Txt</option>
-          </select>
-          <button  type="submit">Unduh</button>
-        </form>
-        <% } %>
+        
       </div>
     </div>
   </div>

@@ -3,7 +3,8 @@ import autoTable from "jspdf-autotable";
 import Contact from "../model/contacts.mjs";
 
 const doc = new jsPDF();
-export const generatePdf = async () => {
+
+export const generateToPdf = async () => {
   const contacts = await Contact.find();
   // Menambahkan judul
   doc.setFontSize(18);

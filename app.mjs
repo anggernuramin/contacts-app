@@ -12,9 +12,10 @@ const port = process.env.PORT || 3000;
 
 import connectDb from "./utils/db.mjs"; // connect database
 import Contact from "./model/contacts.mjs"; // schema database
-import { generatePdf } from "./libs/downloadPdf.mjs";
+import { generateToPdf } from "./libs/downloadPdf.mjs";
 import { fileLoader } from "ejs";
 import { url } from "inspector";
+import { generateToCsv } from "./libs/downloadCsv.mjs";
 
 // start middleware
 app.use(express.static("public"));
@@ -118,7 +119,6 @@ app.get("/contact", async (req, res) => {
 app.post("/contact/download", async (req, res) => {
   // res.download("data/contacts.json");
   const typeFile = req.body.downloadFile;
-  console.log("🚀 ~ app.post ~ typeFile:", typeFile);
   const dirPath = "./data";
   const dataPath = `./data/contacts.${typeFile}`;
   // buat direktory data jika belum ada
@@ -139,7 +139,12 @@ app.post("/contact/download", async (req, res) => {
     res.download(dataPath);
   }
   if (typeFile === "Pdf") {
-    generatePdf();
+    generateToPdf();
+    res.download(dataPath);
+  }
+
+  if (typeFile === "csv") {
+    generateToCsv();
     res.download(dataPath);
   }
 });
@@ -172,6 +177,9 @@ app.post(
         errors: errors.array(),
       });
     } else {
+      // tambah 0 ke no hp  jika no hp adalah indonesia
+      console.log(req.body);
+
       await Contact.insertMany(req.body);
       req.flash("notification", "Data berhasil ditambkan");
       res.redirect("/contact");

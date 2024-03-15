@@ -2,7 +2,8 @@
   "name": "contacts-app-connect-db",
   "version": "1.0.0",
   "main": "index.js",
-  "module": "",
+  "type": "module",
+
   "dependencies": {
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
@@ -21,7 +22,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.mjs"
+    "dev": "node index.js"
   },
   "keywords": [],
   "author": "",

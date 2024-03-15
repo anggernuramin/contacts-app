@@ -1,6 +1,6 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
-import Contact from "../model/contacts.mjs";
+import Contact from "../model/contacts.js";
 
 const doc = new jsPDF();
 

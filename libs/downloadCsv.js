@@ -1,6 +1,6 @@
 import csvjson from "csvjson";
 import fs from "fs";
-import Contact from "../model/contacts.mjs";
+import Contact from "../model/contacts.js";
 export const generateToCsv = async () => {
   const contacts = await Contact.find();
   const deleteObjectV = contacts?.map((item) => {

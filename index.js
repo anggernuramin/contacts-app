@@ -7,15 +7,14 @@ import session from "express-session";
 import flash from "connect-flash";
 import { body, check, validationResult } from "express-validator";
 import methodOverride from "method-override";
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-import connectDb from "./utils/db.mjs"; // connect database
-import Contact from "./model/contacts.mjs"; // schema database
-import { generateToPdf } from "./libs/downloadPdf.mjs";
-import { fileLoader } from "ejs";
-import { url } from "inspector";
-import { generateToCsv } from "./libs/downloadCsv.mjs";
+import connectDb from "./utils/db.js"; // connect database
+import Contact from "./model/contacts.js"; // schema database
+import { generateToPdf } from "./libs/downloadPdf.js";
+import { generateToCsv } from "./libs/downloadCsv.js";
 
 // start middleware
 app.use(express.static("public"));

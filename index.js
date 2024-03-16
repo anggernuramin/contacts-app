@@ -11,7 +11,8 @@ import methodOverride from "method-override";
 const app = express();
 const port = process.env.PORT || 3000;
 
-import connectDb from "./utils/db.js"; // connect database
+import { connectDb } from "./utils/db.js"; // connect database
+connectDb();
 import Contact from "./model/contacts.js"; // schema database
 import { generateToPdf } from "./libs/downloadPdf.js";
 import { generateToCsv } from "./libs/downloadCsv.js";
